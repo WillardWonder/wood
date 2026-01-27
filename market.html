@@ -1,0 +1,1360 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timber Market Intelligence Platform | Wisconsin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --primary-light: #2d6a4f;
+            --primary-dark: #0d2818;
+            --accent: #d4af37;
+            --accent-light: #f0d478;
+            --surface: #ffffff;
+            --surface-alt: #f8f9fa;
+            --border: #e1e4e8;
+            --text-primary: #0d1117;
+            --text-secondary: #57606a;
+            --text-tertiary: #8b949e;
+            --success: #2da44e;
+            --warning: #bf8700;
+            --danger: #cf222e;
+            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 0;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .data-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--surface);
+            padding: 0.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .nav-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: var(--surface-alt);
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-tab .icon {
+            font-size: 1.125rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .card-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-subtitle {
+            margin-top: 0.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .badge-user {
+            background: linear-gradient(135deg, rgba(45, 164, 78, 0.1) 0%, rgba(45, 164, 78, 0.05) 100%);
+            color: var(--success);
+            border: 1px solid rgba(45, 164, 78, 0.2);
+        }
+
+        .badge-sample {
+            background: linear-gradient(135deg, rgba(191, 135, 0, 0.1) 0%, rgba(191, 135, 0, 0.05) 100%);
+            color: var(--warning);
+            border: 1px solid rgba(191, 135, 0, 0.2);
+        }
+
+        .alert {
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            border-left: 4px solid;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .alert-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, rgba(191, 135, 0, 0.08) 0%, rgba(191, 135, 0, 0.04) 100%);
+            border-color: var(--warning);
+            color: #7d5d00;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(13, 110, 253, 0.04) 100%);
+            border-color: #0d6efd;
+            color: #084298;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, rgba(45, 164, 78, 0.08) 0%, rgba(45, 164, 78, 0.04) 100%);
+            border-color: var(--success);
+            color: #1a7f37;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            letter-spacing: 0.01em;
+        }
+
+        .input-hint {
+            display: block;
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+            margin-top: 0.375rem;
+            font-weight: 400;
+        }
+
+        .input-field, .select-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+        }
+
+        .input-field:hover, .select-field:hover {
+            border-color: var(--text-tertiary);
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-alt);
+            border-color: var(--text-secondary);
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--surface-alt) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .metric-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .metric-label {
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .metric-change.positive {
+            color: var(--success);
+        }
+
+        .metric-change.negative {
+            color: var(--danger);
+        }
+
+        .metric-change.neutral {
+            color: var(--text-secondary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9375rem;
+        }
+
+        .data-table thead {
+            background: var(--surface-alt);
+            border-radius: 8px;
+        }
+
+        .data-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .data-table th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .data-table th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .data-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .data-table tbody tr {
+            transition: background 0.15s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--surface-alt);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .value-display {
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.03) 0%, rgba(26, 77, 46, 0.01) 100%);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .value-display-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .value-display-amount {
+            font-family: 'Fraunces', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-display-subtitle {
+            font-size: 0.9375rem;
+            color: var(--text-tertiary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            padding: 1rem;
+            background: var(--surface-alt);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.375rem;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .total-validation {
+            background: var(--surface-alt);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid var(--border);
+        }
+
+        .total-validation.valid {
+            background: linear-gradient(135deg, rgba(45, 164, 78, 0.05) 0%, rgba(45, 164, 78, 0.02) 100%);
+            border-color: var(--success);
+        }
+
+        .total-validation.invalid {
+            background: linear-gradient(135deg, rgba(207, 34, 46, 0.05) 0%, rgba(207, 34, 46, 0.02) 100%);
+            border-color: var(--danger);
+        }
+
+        .principles-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .principles-list li {
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            background: var(--surface-alt);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .principles-list .icon {
+            font-size: 1.25rem;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-tab {
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header-inner {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .logo-title {
+                font-size: 1.25rem;
+            }
+
+            .value-display-amount {
+                font-size: 2.5rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-text {
+            font-size: 0.9375rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">TM</div>
+                <div class="logo-text">
+                    <div class="logo-title">Timber Market Intelligence</div>
+                    <div class="logo-subtitle">North-Central & Northern Wisconsin</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="data-status">
+                    <div class="status-indicator"></div>
+                    <span id="data-status-text">No data loaded</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('setup')">
+                <span class="icon">⚙️</span>
+                <span>Setup</span>
+            </button>
+            <button class="nav-tab" onclick="showTab('overview')">
+                <span class="icon">📊</span>
+                <span>Overview</span>
+            </button>
+            <button class="nav-tab" onclick="showTab('valuation')">
+                <span class="icon">💰</span>
+                <span>Valuation</span>
+            </button>
+            <button class="nav-tab" onclick="showTab('analysis')">
+                <span class="icon">📈</span>
+                <span>Market Analysis</span>
+            </button>
+        </nav>
+
+        <!-- SETUP TAB -->
+        <div id="setup" class="tab-content active">
+            <div class="alert alert-info">
+                <span class="alert-icon">ℹ️</span>
+                <div>
+                    <strong>Data Collection Required</strong><br>
+                    This platform calculates timber values based on your specific forest composition and local market conditions. Complete all sections below to generate accurate valuations.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <span>🌲</span>
+                        Forest Profile
+                    </h2>
+                    <p class="card-subtitle">Basic information about your timber property</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label class="input-label">Property Name</label>
+                        <input type="text" id="property-name" class="input-field" placeholder="e.g., Northwoods Estate">
+                        <span class="input-hint">Optional - for your reference</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Total Acreage</label>
+                        <input type="number" id="forest-acres" class="input-field" placeholder="120">
+                        <span class="input-hint">Total forested acres</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">County</label>
+                        <input type="text" id="county" class="input-field" placeholder="e.g., Oneida">
+                        <span class="input-hint">Wisconsin county location</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Distance to Primary Mill</label>
+                        <input type="number" id="mill-distance" class="input-field" placeholder="15">
+                        <span class="input-hint">Miles to nearest active mill</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <span>🌳</span>
+                        Species Composition
+                    </h2>
+                    <p class="card-subtitle">Percentage breakdown of timber species (must total 100%)</p>
+                </div>
+
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label class="input-label">Hard Maple</label>
+                        <input type="number" class="input-field species-pct" data-species="maple" placeholder="25" min="0" max="100" oninput="updateTotal()">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Oak (Red/White)</label>
+                        <input type="number" class="input-field species-pct" data-species="oak" placeholder="20" min="0" max="100" oninput="updateTotal()">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Pine (Red/White)</label>
+                        <input type="number" class="input-field species-pct" data-species="pine" placeholder="25" min="0" max="100" oninput="updateTotal()">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Aspen</label>
+                        <input type="number" class="input-field species-pct" data-species="aspen" placeholder="15" min="0" max="100" oninput="updateTotal()">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Basswood</label>
+                        <input type="number" class="input-field species-pct" data-species="basswood" placeholder="10" min="0" max="100" oninput="updateTotal()">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Other Hardwoods</label>
+                        <input type="number" class="input-field species-pct" data-species="other" placeholder="5" min="0" max="100" oninput="updateTotal()">
+                    </div>
+                </div>
+
+                <div id="validation-display" class="total-validation">
+                    <strong>Total: <span id="species-total">0</span>%</strong>
+                    <span id="validation-message"></span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <span>📊</span>
+                        Volume Estimates
+                    </h2>
+                    <p class="card-subtitle">Estimated thousand board feet (MBF) per acre by species</p>
+                </div>
+
+                <div class="grid-3">
+                    <div class="input-group">
+                        <label class="input-label">Hard Maple (MBF/acre)</label>
+                        <input type="number" id="maple-mbf" class="input-field" placeholder="2.5" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Oak (MBF/acre)</label>
+                        <input type="number" id="oak-mbf" class="input-field" placeholder="2.2" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Pine (MBF/acre)</label>
+                        <input type="number" id="pine-mbf" class="input-field" placeholder="3.0" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Aspen (MBF/acre)</label>
+                        <input type="number" id="aspen-mbf" class="input-field" placeholder="1.8" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Basswood (MBF/acre)</label>
+                        <input type="number" id="basswood-mbf" class="input-field" placeholder="2.0" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Other (MBF/acre)</label>
+                        <input type="number" id="other-mbf" class="input-field" placeholder="1.5" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <span>💵</span>
+                        Market Pricing
+                    </h2>
+                    <p class="card-subtitle">Current prices from local mills (contact 2-3 mills for accuracy)</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label class="input-label">Hardwood Sawlogs ($/MBF)</label>
+                        <input type="number" id="price-hardwood" class="input-field" placeholder="350">
+                        <span class="input-hint">Price per thousand board feet</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Pine Sawlogs ($/MBF)</label>
+                        <input type="number" id="price-pine" class="input-field" placeholder="280">
+                        <span class="input-hint">Price per thousand board feet</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Pulpwood ($/Cord)</label>
+                        <input type="number" id="price-pulp" class="input-field" placeholder="45">
+                        <span class="input-hint">Price per cord</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Veneer Grade ($/MBF)</label>
+                        <input type="number" id="price-veneer" class="input-field" placeholder="550">
+                        <span class="input-hint">High-grade veneer logs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-primary" onclick="saveData()" style="flex: 1; padding: 1.125rem;">
+                    <span>💾</span>
+                    <span>Save & Calculate Valuation</span>
+                </button>
+                <button class="btn btn-secondary" onclick="loadSampleData()">
+                    <span>📋</span>
+                    <span>Load Sample Data</span>
+                </button>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 2rem;">
+                <span class="alert-icon">🔒</span>
+                <div>
+                    <strong>Privacy & Data Storage</strong><br>
+                    All data is stored locally in your browser using HTML5 localStorage. No information is transmitted to external servers. Your forestry data remains completely private and secure.
+                </div>
+            </div>
+        </div>
+
+        <!-- OVERVIEW TAB -->
+        <div id="overview" class="tab-content">
+            <div id="no-data-alert" class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>Data Required</strong><br>
+                    Navigate to the Setup tab to enter your forest and market data. <span class="badge badge-sample">Currently displaying sample data</span>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: 2rem;">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Property Summary</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Property</div>
+                            <div class="stat-value" id="disp-property">—</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Acreage</div>
+                            <div class="stat-value"><span id="disp-acres">—</span> ac</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Location</div>
+                            <div class="stat-value" id="disp-county">—</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Mill Distance</div>
+                            <div class="stat-value"><span id="disp-distance">—</span> mi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Market Snapshot <span id="market-badge" class="badge badge-sample">Sample Data</span></h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Hardwood</div>
+                            <div class="stat-value">$<span id="snap-hw">350</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Pine</div>
+                            <div class="stat-value">$<span id="snap-pine">280</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Pulpwood</div>
+                            <div class="stat-value">$<span id="snap-pulp">45</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Veneer</div>
+                            <div class="stat-value">$<span id="snap-veneer">550</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Troy Brown's Core Principles</h2>
+                    <p class="card-subtitle">Evidence-based forestry decision framework</p>
+                </div>
+                <ul class="principles-list">
+                    <li>
+                        <span class="icon">🎯</span>
+                        <span><strong>Quality Over Timing:</strong> Good forestry decisions matter far more than perfect market timing. Focus on sustainable management practices that maximize long-term value.</span>
+                    </li>
+                    <li>
+                        <span class="icon">🌱</span>
+                        <span><strong>Biological Growth:</strong> Trees continue adding volume and value biologically during market downturns—a unique advantage over financial assets.</span>
+                    </li>
+                    <li>
+                        <span class="icon">📍</span>
+                        <span><strong>Local Markets:</strong> Transportation costs, mill capacity, and regional demand drive pricing more than national headlines.</span>
+                    </li>
+                    <li>
+                        <span class="icon">🌳</span>
+                        <span><strong>Species Diversification:</strong> A balanced mix of species provides resilience against market volatility and creates more harvest opportunities.</span>
+                    </li>
+                    <li>
+                        <span class="icon">💎</span>
+                        <span><strong>Infrastructure Investment:</strong> Quality trees, reliable access, healthy ecosystems, and disciplined long-term planning create enduring value.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- VALUATION TAB -->
+        <div id="valuation" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Standing Timber Valuation <span id="val-badge" class="badge badge-sample">Sample Data</span></h2>
+                    <p class="card-subtitle">Estimated market value based on current composition and pricing</p>
+                </div>
+
+                <div class="value-display">
+                    <div class="value-display-label">Estimated Total Value</div>
+                    <div class="value-display-amount">$<span id="total-value">0</span></div>
+                    <div class="value-display-subtitle">Standing timber at current market prices</div>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Species</th>
+                            <th style="text-align: right;">Acres</th>
+                            <th style="text-align: right;">MBF/Acre</th>
+                            <th style="text-align: right;">Total MBF</th>
+                            <th style="text-align: right;">Price/MBF</th>
+                            <th style="text-align: right;">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calc-breakdown">
+                        <tr>
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📊</div>
+                                    <div class="empty-state-title">No Data Available</div>
+                                    <div class="empty-state-text">Complete the Setup tab to generate your timber valuation</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>Valuation Disclaimer</strong><br>
+                    These estimates are based on standing timber volumes and current market prices. Actual harvested value will vary based on log quality, grading, market conditions at time of sale, harvesting costs, and buyer negotiations. Always obtain multiple competitive bids from qualified timber buyers.
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYSIS TAB -->
+        <div id="analysis" class="tab-content">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Decision Factors</h2>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Your Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Transportation Cost Impact</strong></td>
+                                <td><span id="transport-impact">—</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Species Diversification</strong></td>
+                                <td><span id="diversity-status">—</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Market Accessibility</strong></td>
+                                <td><span id="market-access">—</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Key Metrics</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Value per Acre</div>
+                            <div class="stat-value">$<span id="value-per-acre">—</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Transport Cost Factor</div>
+                            <div class="stat-value">$<span id="transport-cost">—</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Primary Species</div>
+                            <div class="stat-value" id="primary-species">—</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Species Count</div>
+                            <div class="stat-value" id="species-count">—</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Market Intelligence</h2>
+                    <p class="card-subtitle">Local factors that drive timber pricing</p>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Impact Level</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cabinet Manufacturer Demand</strong></td>
+                            <td><span class="badge" style="background: rgba(45,164,78,0.1); color: var(--success);">High</span></td>
+                            <td>Affects hardwood sawlog pricing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flooring Manufacturer Demand</strong></td>
+                            <td><span class="badge" style="background: rgba(45,164,78,0.1); color: var(--success);">High</span></td>
+                            <td>Influences all species pricing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pulpwood Mill Inventory</strong></td>
+                            <td><span class="badge" style="background: rgba(191,135,0,0.1); color: var(--warning);">Medium</span></td>
+                            <td>Impacts pulpwood and lower-grade pricing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Winter Access Window</strong></td>
+                            <td><span class="badge" style="background: rgba(45,164,78,0.1); color: var(--success);">High</span></td>
+                            <td>Seasonal premium for frozen ground access</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'timber_platform_data_v2';
+
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.species-pct').forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+            
+            document.getElementById('species-total').textContent = total.toFixed(1);
+            
+            const validation = document.getElementById('validation-display');
+            const message = document.getElementById('validation-message');
+            
+            if (Math.abs(total - 100) < 0.1 && total > 0) {
+                validation.classList.remove('invalid');
+                validation.classList.add('valid');
+                message.innerHTML = '<span style="color: var(--success); font-weight: 600;">✓ Valid</span>';
+            } else if (total > 0) {
+                validation.classList.remove('valid');
+                validation.classList.add('invalid');
+                message.innerHTML = '<span style="color: var(--danger); font-weight: 600;">⚠ Must equal 100%</span>';
+            } else {
+                validation.classList.remove('valid', 'invalid');
+                message.textContent = '';
+            }
+        }
+
+        function saveData() {
+            const total = parseFloat(document.getElementById('species-total').textContent);
+            if (Math.abs(total - 100) > 0.1) {
+                alert('❌ Species percentages must total 100%. Current total: ' + total + '%');
+                return;
+            }
+
+            const data = {
+                property: document.getElementById('property-name').value || 'Unnamed Property',
+                acres: parseFloat(document.getElementById('forest-acres').value) || 0,
+                county: document.getElementById('county').value || 'Unknown',
+                distance: parseFloat(document.getElementById('mill-distance').value) || 0,
+                species: {
+                    maple: { 
+                        pct: parseFloat(document.querySelector('[data-species="maple"]').value) || 0, 
+                        mbf: parseFloat(document.getElementById('maple-mbf').value) || 0 
+                    },
+                    oak: { 
+                        pct: parseFloat(document.querySelector('[data-species="oak"]').value) || 0, 
+                        mbf: parseFloat(document.getElementById('oak-mbf').value) || 0 
+                    },
+                    pine: { 
+                        pct: parseFloat(document.querySelector('[data-species="pine"]').value) || 0, 
+                        mbf: parseFloat(document.getElementById('pine-mbf').value) || 0 
+                    },
+                    aspen: { 
+                        pct: parseFloat(document.querySelector('[data-species="aspen"]').value) || 0, 
+                        mbf: parseFloat(document.getElementById('aspen-mbf').value) || 0 
+                    },
+                    basswood: { 
+                        pct: parseFloat(document.querySelector('[data-species="basswood"]').value) || 0, 
+                        mbf: parseFloat(document.getElementById('basswood-mbf').value) || 0 
+                    },
+                    other: { 
+                        pct: parseFloat(document.querySelector('[data-species="other"]').value) || 0, 
+                        mbf: parseFloat(document.getElementById('other-mbf').value) || 0 
+                    }
+                },
+                prices: {
+                    hardwood: parseFloat(document.getElementById('price-hardwood').value) || 0,
+                    pine: parseFloat(document.getElementById('price-pine').value) || 0,
+                    pulp: parseFloat(document.getElementById('price-pulp').value) || 0,
+                    veneer: parseFloat(document.getElementById('price-veneer').value) || 0
+                },
+                savedAt: new Date().toISOString()
+            };
+
+            if (data.acres === 0) {
+                alert('⚠️ Please enter total acreage');
+                return;
+            }
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            loadData();
+            alert('✅ Data saved successfully! Calculations updated.');
+            showTab('overview');
+        }
+
+        function loadSampleData() {
+            document.getElementById('property-name').value = 'Sample Forest Property';
+            document.getElementById('forest-acres').value = '120';
+            document.getElementById('county').value = 'Oneida';
+            document.getElementById('mill-distance').value = '15';
+
+            document.querySelector('[data-species="maple"]').value = '25';
+            document.getElementById('maple-mbf').value = '2.5';
+            
+            document.querySelector('[data-species="oak"]').value = '20';
+            document.getElementById('oak-mbf').value = '2.2';
+            
+            document.querySelector('[data-species="pine"]').value = '25';
+            document.getElementById('pine-mbf').value = '3.0';
+            
+            document.querySelector('[data-species="aspen"]').value = '15';
+            document.getElementById('aspen-mbf').value = '1.8';
+            
+            document.querySelector('[data-species="basswood"]').value = '10';
+            document.getElementById('basswood-mbf').value = '2.0';
+            
+            document.querySelector('[data-species="other"]').value = '5';
+            document.getElementById('other-mbf').value = '1.5';
+
+            document.getElementById('price-hardwood').value = '350';
+            document.getElementById('price-pine').value = '280';
+            document.getElementById('price-pulp').value = '45';
+            document.getElementById('price-veneer').value = '550';
+
+            updateTotal();
+            alert('✅ Sample data loaded. Click "Save & Calculate Valuation" to apply.');
+        }
+
+        function loadData() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (!stored) {
+                document.getElementById('no-data-alert').style.display = 'flex';
+                document.getElementById('data-status-text').textContent = 'No data loaded';
+                return;
+            }
+
+            const data = JSON.parse(stored);
+            document.getElementById('no-data-alert').style.display = 'none';
+            document.getElementById('data-status-text').textContent = 'Data loaded: ' + new Date(data.savedAt).toLocaleDateString();
+            
+            // Update badges
+            document.querySelectorAll('.badge-sample').forEach(b => {
+                b.className = 'badge badge-user';
+                b.textContent = 'Your Data';
+            });
+
+            // Update overview
+            document.getElementById('disp-property').textContent = data.property;
+            document.getElementById('disp-acres').textContent = data.acres;
+            document.getElementById('disp-county').textContent = data.county;
+            document.getElementById('disp-distance').textContent = data.distance;
+
+            document.getElementById('snap-hw').textContent = data.prices.hardwood;
+            document.getElementById('snap-pine').textContent = data.prices.pine;
+            document.getElementById('snap-pulp').textContent = data.prices.pulp;
+            document.getElementById('snap-veneer').textContent = data.prices.veneer;
+
+            // Calculate values
+            let totalValue = 0;
+            const tbody = document.getElementById('calc-breakdown');
+            tbody.innerHTML = '';
+
+            const speciesNames = { 
+                maple: 'Hard Maple', 
+                oak: 'Oak', 
+                pine: 'Pine', 
+                aspen: 'Aspen', 
+                basswood: 'Basswood', 
+                other: 'Other Hardwoods' 
+            };
+
+            let maxPct = 0;
+            let speciesCount = 0;
+            let primarySpecies = '';
+
+            for (const [key, spec] of Object.entries(data.species)) {
+                if (spec.pct > 0) {
+                    speciesCount++;
+                    if (spec.pct > maxPct) {
+                        maxPct = spec.pct;
+                        primarySpecies = speciesNames[key];
+                    }
+
+                    const speciesAcres = data.acres * (spec.pct / 100);
+                    const totalMBF = speciesAcres * spec.mbf;
+                    const price = (key === 'pine') ? data.prices.pine : data.prices.hardwood;
+                    const value = totalMBF * price;
+                    totalValue += value;
+
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td><strong>${speciesNames[key]}</strong></td>
+                        <td style="text-align: right;">${speciesAcres.toFixed(1)}</td>
+                        <td style="text-align: right;">${spec.mbf}</td>
+                        <td style="text-align: right;">${totalMBF.toFixed(1)}</td>
+                        <td style="text-align: right;">$${price.toLocaleString()}</td>
+                        <td style="text-align: right;"><strong>$${Math.round(value).toLocaleString()}</strong></td>
+                    `;
+                }
+            }
+
+            document.getElementById('total-value').textContent = Math.round(totalValue).toLocaleString();
+
+            // Analysis metrics
+            const valuePerAcre = totalValue / data.acres;
+            const transportCost = data.distance * 2.5;
+            
+            document.getElementById('value-per-acre').textContent = Math.round(valuePerAcre).toLocaleString();
+            document.getElementById('transport-cost').textContent = transportCost.toFixed(0);
+            document.getElementById('primary-species').textContent = primarySpecies;
+            document.getElementById('species-count').textContent = speciesCount;
+
+            document.getElementById('transport-impact').textContent = `$${transportCost.toFixed(0)}/MBF (${data.distance} mi × $2.50)`;
+            
+            let diversityMsg = 'Excellent - Well diversified';
+            if (maxPct > 50) diversityMsg = 'Low - Over-concentrated in ' + primarySpecies;
+            else if (maxPct > 40) diversityMsg = 'Fair - Moderate concentration';
+            else if (maxPct > 30) diversityMsg = 'Good - Balanced mix';
+            
+            document.getElementById('diversity-status').textContent = diversityMsg;
+            
+            document.getElementById('market-access').textContent = data.distance < 20 ? 'Good - Within optimal range' : 'Fair - Consider transport costs';
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.closest('.nav-tab').classList.add('active');
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>
