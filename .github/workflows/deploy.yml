@@ -1,0 +1,45 @@
+name: Deploy Wood Dashboard
+
+on:
+  push:
+    branches: [wood]
+  schedule:
+    - cron: '0 */6 * * *' # Runs every 6 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # STEP 1: RUN THE PYTHON SCOUT
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Python Deps
+        run: pip install requests
+      - name: Run Scout
+        run: python scout.py
+
+      # STEP 2: BUILD THE REACT APP
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Node Deps
+        run: npm install
+      - name: Build App
+        run: npm run build
+
+      # STEP 3: DEPLOY TO GITHUB PAGES
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
