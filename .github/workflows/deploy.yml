@@ -25,16 +25,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
+          # Removed "cache: npm" because you don't have a lock file yet
           
       - name: Install Dependencies
-        run: npm ci
+        # Changed from "npm ci" to "npm install" to generate the lock file on the fly
+        run: npm install
         
       - name: Build
         run: npm run build
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3  # CHANGED: Updated from v2 to v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
 
@@ -47,4 +48,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4        # CHANGED: Updated from v2 to v4
+        uses: actions/deploy-pages@v4
