@@ -1,10 +1,10 @@
-name: Deploy Wood Dashboard
+name: Deploy Dashboard
 
 on:
   push:
-    branches: [wood]
+    branches: [main]    # <--- CHANGED FROM 'wood' TO 'main'
   schedule:
-    - cron: '0 */6 * * *' # Runs every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # STEP 1: RUN THE PYTHON SCOUT
+      # 1. SETUP PYTHON SCOUT
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -27,7 +27,7 @@ jobs:
       - name: Run Scout
         run: python scout.py
 
-      # STEP 2: BUILD THE REACT APP
+      # 2. BUILD REACT APP
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -37,9 +37,9 @@ jobs:
       - name: Build App
         run: npm run build
 
-      # STEP 3: DEPLOY TO GITHUB PAGES
+      # 3. DEPLOY TO GH-PAGES BRANCH
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
+          branch: gh-pages  # The action will CREATE this branch for you
           folder: dist
