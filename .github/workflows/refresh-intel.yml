@@ -1,0 +1,28 @@
+name: Refresh Market Intelligence
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Runs daily at 6am
+  workflow_dispatch:      # Allows manual click-to-run
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Harvest Data
+        run: node scripts/fetch-data.js
+
+      - name: Commit Intelligence
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "🌲 INTELLIGENCE UPDATE: ${{ steps.date.outputs.date }}"
+          file_pattern: public/intelligence.json
